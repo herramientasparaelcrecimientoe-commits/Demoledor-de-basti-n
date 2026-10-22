@@ -14,14 +14,14 @@
 <body class="bg-[#FAFAFA] text-zinc-900 min-h-screen flex flex-col justify-between selection:bg-zinc-200">
 
     <!-- Header minimalista -->
-    <header class="w-full max-w-xl mx-auto px-6 pt-12 pb-6 flex justify-between items-center">
+    <header class="w-full max-w-xl mx-auto px-6 pt-10 pb-6 flex justify-between items-center">
         <div>
             <h1 class="text-xl font-semibold tracking-tight text-zinc-800">Santuario</h1>
             <p class="text-xs text-zinc-400 mt-0.5">Camino de renovación de 60 días</p>
         </div>
         <div class="text-right">
             <span id="streakBadge" class="text-xs font-medium bg-zinc-100 text-zinc-700 px-3 py-1.5 rounded-full border border-zinc-200/60">
-                Día 0 de 60
+                Día 1 de 60
             </span>
         </div>
     </header>
@@ -29,14 +29,14 @@
     <!-- Contenedor Principal -->
     <main class="w-full max-w-xl mx-auto px-6 flex-grow pb-12 space-y-6">
 
-        <!-- Tarjeta de Contenido Diario (Cambia cada día) -->
+        <!-- Tarjeta de Contenido Diario -->
         <section class="bg-white border border-zinc-200/80 rounded-2xl p-8 shadow-sm transition-all duration-300">
             <div class="flex justify-between items-center mb-4">
                 <span id="dayIndicator" class="text-xs font-semibold tracking-widest uppercase text-zinc-400">Día 1</span>
                 <span id="progressPercent" class="text-xs font-medium text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-md">2% Completado</span>
             </div>
 
-            <!-- Versículo del día -->
+            <!-- Principio y Cita -->
             <div class="mb-6">
                 <p class="text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">Ancla de la Verdad</p>
                 <blockquote id="dailyVerse" class="text-lg font-medium text-zinc-800 leading-relaxed italic">
@@ -47,67 +47,134 @@
 
             <hr class="border-zinc-100 my-6">
 
-            <!-- Tip / Consejo del día -->
-            <div>
-                <p class="text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">Práctica para hoy</p>
-                <p id="dailyTip" class="text-sm text-zinc-600 leading-relaxed">
-                    Cargando consejo diario...
-                </p>
+            <!-- Práctica y Estrategia del día -->
+            <div class="space-y-4">
+                <div>
+                    <p class="text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-1">Práctica para hoy</p>
+                    <p id="dailyTip" class="text-sm text-zinc-600 leading-relaxed">
+                        Cargando consejo diario...
+                    </p>
+                </div>
+                <div class="bg-zinc-50 p-4 rounded-xl border border-zinc-100">
+                    <p class="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">Acción Recomendada</p>
+                    <p id="dailyAction" class="text-xs text-zinc-600 leading-relaxed">
+                        Cargando acción...
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Check-list de Hábitos Diarios -->
+        <section class="bg-white border border-zinc-200/80 rounded-2xl p-6 shadow-sm space-y-3">
+            <h3 class="text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">Hábitos de Blindaje Hoy</h3>
+            <div class="space-y-2 text-xs">
+                <label class="flex items-center space-x-3 text-zinc-700 cursor-pointer">
+                    <input type="checkbox" id="habitScreen" class="rounded border-zinc-300 text-zinc-900 focus:ring-zinc-400">
+                    <span>Dispositivos fuera del dormitorio antes de dormir</span>
+                </label>
+                <label class="flex items-center space-x-3 text-zinc-700 cursor-pointer">
+                    <input type="checkbox" id="habitMind" class="rounded border-zinc-300 text-zinc-900 focus:ring-zinc-400">
+                    <span>10 minutos de reflexión/oración al despertar</span>
+                </label>
+                <label class="flex items-center space-x-3 text-zinc-700 cursor-pointer">
+                    <input type="checkbox" id="habitSocial" class="rounded border-zinc-300 text-zinc-900 focus:ring-zinc-400">
+                    <span>Conexión o conversación sincera con alguien cercano</span>
+                </label>
             </div>
         </section>
 
         <!-- Botón de Registro Diario -->
         <div id="actionContainer">
-            <button onclick="completarDia()" id="checkinBtn" class="w-full bg-zinc-900 hover:bg-zinc-800 text-white font-medium py-4 px-6 rounded-2xl transition-all duration-200 text-sm shadow-sm flex items-center justify-center space-h-2">
+            <button onclick="completarDia()" id="checkinBtn" class="w-full bg-zinc-900 hover:bg-zinc-800 text-white font-medium py-4 px-6 rounded-2xl transition-all duration-200 text-sm shadow-sm flex items-center justify-center space-x-2">
                 <span>Completar y registrar el día ✨</span>
             </button>
             <p id="alreadyCheckedMsg" class="text-center text-xs text-emerald-600 font-medium hidden mt-2">✓ Ya registraste tu progreso el día de hoy. ¡Nos vemos mañana!</p>
         </div>
 
-        <!-- Botiquín de Emergencia (Desplegable o minimalista) -->
+        <!-- Botiquín de Emergencia / Pausa Activa -->
         <section class="bg-zinc-50 border border-zinc-200/60 rounded-2xl p-6">
-            <h3 class="text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-3">Zona de Pausa (Botiquín)</h3>
-            <p class="text-xs text-zinc-500 mb-4">¿Sientes un momento de tensión o impulso en este instante? Detente un momento:</p>
+            <h3 class="text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-1">Zona de Pausa (Botiquín)</h3>
+            <p class="text-xs text-zinc-500 mb-4">Si experimentas un impulso o estado de tensión emocional, usa estas técnicas inmediatas:</p>
             
             <div class="grid grid-cols-2 gap-2">
                 <button onclick="mostrarPausa('respirar')" class="text-left text-xs bg-white hover:bg-zinc-100 p-3 rounded-xl border border-zinc-200/60 transition font-medium text-zinc-700">
-                    🌬️ Pausa de respiración
+                    🌬️ Respiración 4-7-8
                 </button>
                 <button onclick="mostrarPausa('realidad')" class="text-left text-xs bg-white hover:bg-zinc-100 p-3 rounded-xl border border-zinc-200/60 transition font-medium text-zinc-700">
-                    ⚓ Recordar mi identidad
+                    ⚓ Ancla de Identidad
+                </button>
+                <button onclick="mostrarPausa('grounding')" class="text-left text-xs bg-white hover:bg-zinc-100 p-3 rounded-xl border border-zinc-200/60 transition font-medium text-zinc-700">
+                    🧠 Técnica 5-4-3-2-1
+                </button>
+                <button onclick="mostrarPausa('regla5')" class="text-left text-xs bg-white hover:bg-zinc-100 p-3 rounded-xl border border-zinc-200/60 transition font-medium text-zinc-700">
+                    ⏱️ Regla de los 15 minutos
                 </button>
             </div>
-            <div id="pausaBox" class="mt-4 text-xs text-zinc-600 bg-white p-4 rounded-xl border border-zinc-200/60 hidden"></div>
+            <div id="pausaBox" class="mt-4 text-xs text-zinc-600 bg-white p-4 rounded-xl border border-zinc-200/60 hidden leading-relaxed"></div>
         </section>
 
     </main>
 
     <!-- Footer minimalista -->
     <footer class="w-full max-w-xl mx-auto px-6 py-6 text-center border-t border-zinc-100">
-        <p class="text-[11px] text-zinc-400">Tus datos se almacenan de forma local y privada en tu dispositivo.</p>
+        <p class="text-[11px] text-zinc-400">Tus datos se almacenan de forma local y privada en tu navegador.</p>
     </footer>
 
-    <!-- Lógica de Contenido de los 60 días -->
+    <!-- Lógica y Base de Conocimiento -->
     <script>
-        // Banco de contenido único para los 60 días (versos constructivos, identidad y hábitos)
+        // Banco ampliado de principios, prácticas y acciones de renovación
         const content60Days = [
-            { verse: "Ahora, pues, ninguna condenación hay para los que están en Cristo Jesús.", ref: "Romanos 8:1", tip: "El pasado no te define. Si el enemigo te trae culpa, recuerda que tu posición en Cristo es limpia y nueva cada mañana." },
-            { verse: "Sométanse, pues, a Dios; resistid al diablo, y huirá de vosotros.", ref: "Santiago 4:7", tip: "La victoria empieza en la sumisión voluntaria a Dios. Cuando sientas debilidad, reconoce tu necesidad de Él antes de intentar luchar solo." },
-            { verse: "No se ha apoderado de ustedes ninguna tentación que no sea común a los hombres...", ref: "1 Corintios 10:13", tip: "No estás solo en esta lucha. Identifica en qué momento exacto del día o bajo qué emoción (cansancio, estrés) suele aparecer el detonante." },
-            { verse: "Lámpara es a mis pies tu palabra, y lumbrera a mi camino.", ref: "Salmos 119:105", tip: "No intentes planificar los próximos dos meses hoy. Concéntrate únicamente en tomar buenas decisiones durante las próximas 24 horas." },
-            { verse: "Por nada estéis afanosos, sino sean conocidas vuestras peticiones delante de Dios...", ref: "Filipenses 4:6-7", tip: "Muchas veces la búsqueda rápida de placer es solo un escape para la ansiedad o el vacío emocional. Dirige esa necesidad de consuelo hacia la oración." },
-            { verse: "Examíname, oh Dios, y conoce mi corazón; pruébame y conoce mis pensamientos.", ref: "Salmos 139:23", tip: "Dedica 5 minutos hoy a escribir qué pensamientos repetitivos rondan tu mente y cámbialos por una verdad constructiva." },
-            { verse: "Por lo demás, hermanos, todo lo que es verdadero, todo lo honesto... tened en cuenta esto.", ref: "Filipenses 4:8", tip: "Cuida lo que entra por tus ojos hoy. Tu mente es un jardín: cultiva pensamientos que edifiquen tu bienestar a largo plazo." }
-            // Se pueden expandir dinámicamente o ciclar de forma inteligente para cubrir los 60 días con variedad.
+            {
+                verse: "No os conforméis a este siglo, sino transformaos mediante la renovación de vuestro entendimiento.",
+                ref: "Romanos 12:2",
+                tip: "La libertad no se logra simplemente 'resistiendo' con fuerza de voluntad pura, sino reconfigurando el enfoque mental hacia aquello que edifica.",
+                action: "Identifica qué contenido consumiste hoy en redes sociales que despertó intranquilidad y elimina o silencia esas cuentas."
+            },
+            {
+                verse: "Por nada estéis afanosos, sino sean conocidas vuestras peticiones delante de Dios...",
+                ref: "Filipenses 4:6-7",
+                tip: "Los impulsos compulsivos suelen ser intentos de anestesiar el estrés, la soledad o el cansancio. Aprende a identificar la emoción subyacente.",
+                action: "Escribe en una nota las 3 cosas que más te estresaron hoy en lugar de guardar la tensión en el cuerpo."
+            },
+            {
+                verse: "Sobre toda cosa guardada, guarda tu corazón; porque de él mana la vida.",
+                ref: "Proverbios 4:23",
+                tip: "Crear un entorno seguro es clave. El dominio propio aumenta cuando reduces las tentaciones innecesarias en tu entorno digital.",
+                action: "Instala un filtro de contenido o deja los cargadores fuera de la habitación durante la noche."
+            },
+            {
+                verse: "Confesaos vuestras ofensas unos a otros, y orad unos por otros, para que seáis sanados.",
+                ref: "Santiago 5:16",
+                tip: "El aislamiento alimenta los hábitos ocultos; la transparencia les quita fuerza. La comunidad es una de las herramientas más efectivas para el cambio.",
+                action: "Habla con un amigo de confianza o mentores sobre tu meta de renovación esta semana."
+            },
+            {
+                verse: "El prudente ve el mal y se esconde; mas los simples pasan y reciben el daño.",
+                ref: "Proverbios 22:3",
+                tip: "Aprende la 'regla del entorno': no luches contra la tentación en el mismo lugar físico y posición donde suele aparecer.",
+                action: "Si sientes inquietud frente a una pantalla, levántate inmediatamente y cambia de habitación o sal a caminar 5 minutos."
+            },
+            {
+                verse: "Lámpara es a mis pies tu palabra, y lumbrera a mi camino.",
+                ref: "Salmos 119:105",
+                tip: "No intentes solucionar los próximos 60 días en un instante. Enfócate exclusivamente en tomar decisiones saludables durante las próximas 24 horas.",
+                action: "Completa tus tareas del día y mantén un horario constante para ir a dormir."
+            },
+            {
+                verse: "Por lo demás, hermanos, todo lo que es verdadero, todo lo honesto... en esto pensad.",
+                ref: "Filipenses 4:8",
+                tip: "Sustituye la evasión por actividades que generen dopamina saludable: deporte, lectura, arte, estudio o servicio a los demás.",
+                action: "Dedica al menos 30 minutos a una actividad física o hobby práctico durante el día."
+            }
         ];
 
-        // Función para obtener contenido cíclico o estructurado según el día actual del usuario
+        // Función para obtener contenido (cicla si el plan supera la lista)
         function obtenerContenido(dia) {
             const index = (dia - 1) % content60Days.length;
             return content60Days[index];
         }
 
-        // Cargar estado desde localStorage
+        // Cargar estado
         let userData = JSON.parse(localStorage.getItem('sanctuary_data')) || {
             currentDay: 1,
             lastCheckinDate: null
@@ -117,20 +184,18 @@
             const hoy = new Date().toDateString();
             const yaRegistroHoy = userData.lastCheckinDate === hoy;
 
-            // Actualizar textos de días
             document.getElementById('streakBadge').innerText = `Día ${userData.currentDay} de 60`;
             document.getElementById('dayIndicator').innerText = `Día ${userData.currentDay}`;
             
             const porcentaje = Math.min(Math.round((userData.currentDay / 60) * 100), 100);
             document.getElementById('progressPercent').innerText = `${porcentaje}% Completado`;
 
-            // Cargar contenido correspondiente al día actual
             const contenido = obtenerContenido(userData.currentDay);
             document.getElementById('dailyVerse').innerText = `"${contenido.verse}"`;
             document.getElementById('verseRef').innerText = `— ${contenido.ref}`;
             document.getElementById('dailyTip').innerText = contenido.tip;
+            document.getElementById('dailyAction').innerText = contenido.action;
 
-            // Manejar botón de registro diario
             if (yaRegistroHoy) {
                 document.getElementById('checkinBtn').classList.add('hidden');
                 document.getElementById('alreadyCheckedMsg').classList.remove('hidden');
@@ -147,22 +212,32 @@
             userData.currentDay = Math.min(userData.currentDay + 1, 60);
             userData.lastCheckinDate = hoy;
 
+            // Resetear checkboxes de hábitos
+            document.getElementById('habitScreen').checked = false;
+            document.getElementById('habitMind').checked = false;
+            document.getElementById('habitSocial').checked = false;
+
             localStorage.setItem('sanctuary_data', JSON.stringify(userData));
             actualizarInterfaz();
-            alert('¡Excelente constancia! Has avanzado un día más en tu proceso de renovación.');
+            alert('¡Progreso guardado! Has dado un paso firme en tu camino de renovación hoy.');
         }
 
         function mostrarPausa(tipo) {
             const box = document.getElementById('pausaBox');
             box.classList.remove('hidden');
+            
             if (tipo === 'respirar') {
-                box.innerHTML = "<strong>Pausa de respiración:</strong> Cierra los ojos. Inhala profundamente contando hasta 4, mantén el aire durante 4 segundos y exhala lentamente contando hasta 6. Repítelo 3 veces para calmar el sistema nervioso.";
-            } else {
-                box.innerHTML = "<strong>Recordatorio de identidad:</strong> Ya no eres esclavo de patrones antiguos. Tu cuerpo es templo del Espíritu Santo y tienes la capacidad de decidir con libertad en este preciso instante.";
+                box.innerHTML = "<strong>Respiración 4-7-8:</strong> Inhala por la nariz en 4 segundos, sostén el aire durante 7 segundos y exhala suavemente por la boca durante 8 segundos. Repite este ciclo 4 veces para desactivar la respuesta de estrés.";
+            } else if (tipo === 'realidad') {
+                box.innerHTML = "<strong>Ancla de Identidad:</strong> Recuerda que las emociones e impulsos son olas temporales, no órdenes que debas obedecer. Tienes la libertad y la capacidad de elegir lo que edifica tu vida hoy.";
+            } else if (tipo === 'grounding') {
+                box.innerHTML = "<strong>Técnica 5-4-3-2-1:</strong> Mira a tu alrededor e identifica en voz alta: 5 objetos que puedas ver, 4 cosas que puedas tocar, 3 sonidos que escuches, 2 olores que percibas y 1 sabor. Esto regresa tu mente al presente.";
+            } else if (tipo === 'regla5') {
+                box.innerHTML = "<strong>Regla de los 15 minutos:</strong> Los picos de impulso duran en promedio entre 10 y 15 minutos. Comprométete a posponer cualquier decisión durante 15 minutos mientras cambias de ambiente o bebes un vaso de agua.";
             }
         }
 
-        // Inicializar al cargar
+        // Inicialización
         actualizarInterfaz();
     </script>
 </body>
